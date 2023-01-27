@@ -13,8 +13,8 @@ import static com.attornatus.cadastro.mapper.EnderecoMapper.toEnderecosResponse;
 
 @Component
 @Lazy
-public abstract class PessoaMapper {
-    public static Pessoa toPessoa(PessoaRequest dto, List<Endereco> enderecos){
+public interface PessoaMapper {
+     static Pessoa toPessoa(PessoaRequest dto, List<Endereco> enderecos){
         return Pessoa.builder()
                 .nome(dto.getNome())
                 .dataNascimento(dto.getDataNascimento())
@@ -22,7 +22,7 @@ public abstract class PessoaMapper {
                 .build();
     }
 
-    public static PessoaResponse toPessoaResponse(Pessoa pessoa){
+     static PessoaResponse toPessoaResponse(Pessoa pessoa){
         return PessoaResponse.builder()
                 .id(pessoa.getId())
                 .nome(pessoa.getNome())

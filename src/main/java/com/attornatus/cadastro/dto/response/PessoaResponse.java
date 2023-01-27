@@ -1,6 +1,10 @@
 package com.attornatus.cadastro.dto.response;
 
-import com.attornatus.cadastro.dto.response.EnderecoResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +19,12 @@ import java.util.List;
 public class PessoaResponse {
 
     Long id;
-    String nome;
-    LocalDate dataNascimento;
-    List<EnderecoResponse> endereco;
 
+    String nome;
+
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    LocalDate dataNascimento;
+
+    List<EnderecoResponse> endereco;
 }

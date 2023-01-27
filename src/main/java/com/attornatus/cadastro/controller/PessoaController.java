@@ -23,7 +23,7 @@ public class PessoaController {
 
     @PostMapping("/pessoa")
     public ResponseEntity<PessoaResponse> salvar(@RequestBody @Valid PessoaRequest autorRequest) {
-        return new ResponseEntity<PessoaResponse>(pessoaService.salvarPessoa(autorRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(pessoaService.salvarPessoa(autorRequest), HttpStatus.CREATED);
     }
 
 }

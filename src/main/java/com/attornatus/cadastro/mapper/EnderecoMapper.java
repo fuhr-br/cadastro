@@ -10,9 +10,9 @@ import java.util.List;
 
 @Component
 @Lazy
-public abstract class EnderecoMapper {
+public interface EnderecoMapper {
 
-    public static Endereco toEndereco(EnderecoRequest dto){
+     static Endereco toEndereco(EnderecoRequest dto){
         return  Endereco.builder()
                 .logradluro(dto.getLogradluro())
                 .cep(dto.getCep())
@@ -20,14 +20,12 @@ public abstract class EnderecoMapper {
                 .numero(dto.getNumero()).build();
     }
 
-    public static List<Endereco> toEnderecos(List<EnderecoRequest> lista){
-
-      return   lista.stream().map((enderecoDTO) -> toEndereco(enderecoDTO)).toList();
-
+     static List<Endereco> toEnderecos(List<EnderecoRequest> lista){
+      return   lista.stream().map(EnderecoMapper::toEndereco).toList();
     }
 
-    public static List<EnderecoResponse> toEnderecosResponse(List<Endereco> endereco){
-        return endereco.stream().map((dto)->
+     static List<EnderecoResponse> toEnderecosResponse(List<Endereco> endereco){
+        return endereco.stream().map(dto->
                 EnderecoResponse.builder()
                         .id(dto.getId())
                         .logradluro(dto.getLogradluro())

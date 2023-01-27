@@ -1,7 +1,10 @@
 package com.attornatus.cadastro.dto.request;
 
-import com.attornatus.cadastro.dto.request.EnderecoRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,10 +27,10 @@ public class PessoaRequest {
     String nome;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = "Campo Datas inválido")
     @Schema(description = "Data nascimento da pessoa", example = "1986-03-30", required = true)
     LocalDate dataNascimento;
 
     List<@Valid EnderecoRequest> enderecos;
-
 }

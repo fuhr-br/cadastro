@@ -1,9 +1,6 @@
 package com.attornatus.cadastro.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Entity
+@EqualsAndHashCode
 @Table(name = "ENDERECO")
 public class Endereco {
 

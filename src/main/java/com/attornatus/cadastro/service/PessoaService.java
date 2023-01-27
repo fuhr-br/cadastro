@@ -5,13 +5,11 @@ import com.attornatus.cadastro.domain.Pessoa;
 import com.attornatus.cadastro.dto.request.EnderecoRequest;
 import com.attornatus.cadastro.dto.request.PessoaRequest;
 import com.attornatus.cadastro.dto.response.PessoaResponse;
-import com.attornatus.cadastro.infra.EnderecoRepository;
-import com.attornatus.cadastro.infra.PessoaRepository;;
+import com.attornatus.cadastro.infra.PessoaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-
 import static com.attornatus.cadastro.mapper.EnderecoMapper.toEnderecos;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoa;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoaResponse;
@@ -20,12 +18,12 @@ import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoaResponse;
 public class PessoaService {
 
     private final PessoaRepository pessoaRepository;
-    private final EnderecoRepository enderecoRepository;
+    private final EnderecoService enderecoService;
 
     public PessoaService(PessoaRepository pessoaRepository,
-                         EnderecoRepository enderecoRepository) {
+                         EnderecoService enderecoService) {
         this.pessoaRepository = pessoaRepository;
-        this.enderecoRepository = enderecoRepository;
+        this.enderecoService = enderecoService;
     }
 
     @Transactional
@@ -39,7 +37,7 @@ public class PessoaService {
 
     private  List<Endereco> salvarEnderecos(List<EnderecoRequest> dtos){
       List<Endereco> enderecos = toEnderecos(dtos);
-      return enderecos.stream().map((endereco)-> enderecoRepository.save(endereco) ).toList();
+      return enderecos.stream().map(enderecoService::save).toList();
     }
 
 

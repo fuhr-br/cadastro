@@ -15,7 +15,7 @@ public abstract class EnderecoMapper {
     public static Endereco toEndereco(EnderecoRequest dto){
         return  Endereco.builder()
                 .logradluro(dto.getLogradluro())
-                .CEP(dto.getCEP())
+                .cep(dto.getCep())
                 .cidade(dto.getCidade())
                 .numero(dto.getNumero()).build();
     }
@@ -32,7 +32,7 @@ public abstract class EnderecoMapper {
                         .id(dto.getId())
                         .logradluro(dto.getLogradluro())
                         .numero(dto.getNumero())
-                        .CEP(dto.getCEP())
+                        .cep(dto.getCep())
                         .cidade(dto.getCidade())
                 .build() ).toList();
     }

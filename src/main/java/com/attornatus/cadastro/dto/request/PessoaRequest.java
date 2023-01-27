@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
 @Data
 public class PessoaRequest {
 
+    @NotBlank(message = "Campo nome não pode ser nulo ou vazio")
+    @Size(min=4, max = 70, message = "Campo nome Ultrapassou o limite de caracteres, max 70")
     String nome;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
@@ -23,6 +28,6 @@ public class PessoaRequest {
     @Schema(description = "Data nascimento da pessoa", example = "1986-03-30", required = true)
     LocalDate dataNascimento;
 
-    List<EnderecoRequest> enderecos;
+    List<@Valid EnderecoRequest> enderecos;
 
 }

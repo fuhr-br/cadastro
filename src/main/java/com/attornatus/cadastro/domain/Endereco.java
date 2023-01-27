@@ -23,7 +23,7 @@ public class Endereco {
     String logradluro;
 
     @Column(name="CEP", nullable = false)
-    String CEP;
+    String cep;
 
     @Column(name="NUMERO", nullable = false)
     Integer numero;

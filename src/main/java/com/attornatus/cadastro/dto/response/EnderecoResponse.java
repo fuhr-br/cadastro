@@ -13,7 +13,7 @@ public class EnderecoResponse {
 
     Long id;
     String logradluro;
-    String CEP;
+    String cep;
     Integer numero;
     String cidade;
 }

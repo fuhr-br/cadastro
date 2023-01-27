@@ -2,12 +2,14 @@ package com.attornatus.cadastro.mapper;
 
 import com.attornatus.cadastro.domain.Endereco;
 import com.attornatus.cadastro.domain.Pessoa;
-import com.attornatus.cadastro.dto.PessoaRequest;
-import com.attornatus.cadastro.dto.PessoaResponse;
+import com.attornatus.cadastro.dto.request.PessoaRequest;
+import com.attornatus.cadastro.dto.response.PessoaResponse;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static com.attornatus.cadastro.mapper.EnderecoMapper.toEnderecosResponse;
 
 @Component
 @Lazy
@@ -25,7 +27,7 @@ public abstract class PessoaMapper {
                 .id(pessoa.getId())
                 .nome(pessoa.getNome())
                 .dataNascimento(pessoa.getDataNascimento())
-                .endereco(pessoa.getEndereco())
+                .endereco(toEnderecosResponse(pessoa.getEndereco()))
                 .build();
     }
 }

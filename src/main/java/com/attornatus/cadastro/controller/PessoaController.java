@@ -1,8 +1,8 @@
 package com.attornatus.cadastro.controller;
 
 
-import com.attornatus.cadastro.dto.PessoaRequest;
-import com.attornatus.cadastro.dto.PessoaResponse;
+import com.attornatus.cadastro.dto.request.PessoaRequest;
+import com.attornatus.cadastro.dto.response.PessoaResponse;
 import com.attornatus.cadastro.service.PessoaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

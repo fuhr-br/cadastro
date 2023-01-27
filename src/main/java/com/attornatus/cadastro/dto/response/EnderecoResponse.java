@@ -1,25 +1,19 @@
-package com.attornatus.cadastro.dto;
+package com.attornatus.cadastro.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class EnderecoRequest {
+public class EnderecoResponse {
 
-    @NotBlank
+    Long id;
     String logradluro;
-
-    @NotBlank
     String CEP;
-
-    @NotBlank
     Integer numero;
-
-    @NotBlank
     String cidade;
 }

@@ -1,7 +1,8 @@
 package com.attornatus.cadastro.mapper;
 
 import com.attornatus.cadastro.domain.Endereco;
-import com.attornatus.cadastro.dto.EnderecoRequest;
+import com.attornatus.cadastro.dto.request.EnderecoRequest;
+import com.attornatus.cadastro.dto.response.EnderecoResponse;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,17 @@ public abstract class EnderecoMapper {
 
       return   lista.stream().map((enderecoDTO) -> toEndereco(enderecoDTO)).toList();
 
+    }
+
+    public static List<EnderecoResponse> toEnderecosResponse(List<Endereco> endereco){
+        return endereco.stream().map((dto)->
+                EnderecoResponse.builder()
+                        .id(dto.getId())
+                        .logradluro(dto.getLogradluro())
+                        .numero(dto.getNumero())
+                        .CEP(dto.getCEP())
+                        .cidade(dto.getCidade())
+                .build() ).toList();
     }
 
 

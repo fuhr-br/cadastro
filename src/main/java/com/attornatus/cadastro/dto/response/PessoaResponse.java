@@ -1,6 +1,6 @@
-package com.attornatus.cadastro.dto;
+package com.attornatus.cadastro.dto.response;
 
-import com.attornatus.cadastro.domain.Endereco;
+import com.attornatus.cadastro.dto.response.EnderecoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +17,6 @@ public class PessoaResponse {
     Long id;
     String nome;
     LocalDate dataNascimento;
-    List<Endereco> endereco;
+    List<EnderecoResponse> endereco;
 
 }

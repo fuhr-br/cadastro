@@ -2,9 +2,9 @@ package com.attornatus.cadastro.service;
 
 import com.attornatus.cadastro.domain.Endereco;
 import com.attornatus.cadastro.domain.Pessoa;
-import com.attornatus.cadastro.dto.EnderecoRequest;
-import com.attornatus.cadastro.dto.PessoaRequest;
-import com.attornatus.cadastro.dto.PessoaResponse;
+import com.attornatus.cadastro.dto.request.EnderecoRequest;
+import com.attornatus.cadastro.dto.request.PessoaRequest;
+import com.attornatus.cadastro.dto.response.PessoaResponse;
 import com.attornatus.cadastro.infra.EnderecoRepository;
 import com.attornatus.cadastro.infra.PessoaRepository;;
 import org.springframework.stereotype.Service;

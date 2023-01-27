@@ -1,5 +1,6 @@
-package com.attornatus.cadastro.dto;
+package com.attornatus.cadastro.dto.request;
 
+import com.attornatus.cadastro.dto.request.EnderecoRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

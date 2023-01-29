@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+import static com.attornatus.cadastro.mapper.EnderecoMapper.toEndereco;
 import static com.attornatus.cadastro.mapper.EnderecoMapper.toEnderecos;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoa;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoaResponse;
@@ -43,13 +45,12 @@ public class PessoaService {
 
     private  List<Endereco> salvarEnderecos(List<EnderecoRequest> dtos){
       List<Endereco> enderecos = toEnderecos(dtos);
-      return enderecos.stream().map(enderecoService::save).toList();
+      return enderecos.stream().map(enderecoService::salvar).toList();
     }
 
 
     public PessoaResponse buscaPorId(Long id) {
-        return toPessoaResponse(pessoaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(MENSAGEM_EXCEPTION_NOT_FOUND)));
+        return toPessoaResponse(buscarPessoaPorId(id));
     }
 
     @Transactional
@@ -68,5 +69,20 @@ public class PessoaService {
         return pessoaRepository.findAll().stream().map(PessoaMapper::toPessoaResponse).toList();
     }
 
+    @Transactional
+    public PessoaResponse salvarEndereco(EnderecoRequest enderecoRequest, Long id) {
+       Pessoa pessoa = buscarPessoaPorId(id);
+
+        Endereco endereco = toEndereco(enderecoRequest);
+        Endereco enderecoSalvo = enderecoService.salvar(endereco);
+        pessoa.getEndereco().add(enderecoSalvo);
+
+       return toPessoaResponse(pessoaRepository.save(pessoa));
+    }
+
+    public Pessoa buscarPessoaPorId(Long id) {
+        return pessoaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(MENSAGEM_EXCEPTION_NOT_FOUND));
+    }
 
 }

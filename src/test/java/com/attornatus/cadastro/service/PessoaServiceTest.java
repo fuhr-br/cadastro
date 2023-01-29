@@ -42,7 +42,7 @@ class PessoaServiceTest {
     @Test
     @DisplayName("Deve salvar uma Pessoa com Sucesso")
     void salvarPessoa() {
-        when(enderecoServiceMock.save(endereco)).thenReturn(endereco);
+        when(enderecoServiceMock.salvar(endereco)).thenReturn(endereco);
         when(pessoaRepositoryMock.save(any(Pessoa.class))).thenReturn(pessoa);
         PessoaResponse pessoaResponse= pessoaService.salvarPessoa(PessoaRequestStub.construirParaPersistir());
 

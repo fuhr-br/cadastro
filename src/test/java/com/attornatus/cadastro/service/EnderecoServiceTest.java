@@ -28,7 +28,7 @@ class EnderecoServiceTest {
     @DisplayName("Deve salvar um Endereco com Sucesso")
     void save() {
         when(enderecoRepositoryMock.save(endereco)).thenReturn(endereco);
-        Endereco retorno = enderecoService.save(endereco);
+        Endereco retorno = enderecoService.salvar(endereco);
         assertThat(endereco).isNotNull().isEqualTo(retorno);
     }
 }

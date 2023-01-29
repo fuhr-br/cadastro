@@ -101,7 +101,7 @@ Setar o campo JDBC URL para:  **jdbc:h2:mem:cadastro**
 ### Descrição dos endpoints:
 | Metodo | Endpoint | Documentação |
 | :-: | :-: | :-: |
-| PUT | /cadastro/pessoa  Altera dados somente da pessoa, sem endereço |
+| PUT | /cadastro/pessoa | Altera dados somente da pessoa, sem endereço |
 | POST | /cadastro/pessoa | Cadastra uma pessoa com endereço |
 | PUT | /cadastro/pessoa/{idPessoa}/endereco/{idEndereco} | Seta ou troca o endereço principal |
 | POST | /cadastro/pessoa/{id}/endereco} | Adiciona um endereço a uma pessoa |

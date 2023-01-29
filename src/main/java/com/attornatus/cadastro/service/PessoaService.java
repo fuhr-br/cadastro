@@ -5,6 +5,7 @@ import com.attornatus.cadastro.domain.Pessoa;
 import com.attornatus.cadastro.dto.request.EnderecoRequest;
 import com.attornatus.cadastro.dto.request.PessoaRequest;
 import com.attornatus.cadastro.dto.request.PessoaSemEnderecoRequest;
+import com.attornatus.cadastro.dto.response.EnderecoResponse;
 import com.attornatus.cadastro.dto.response.PessoaResponse;
 import com.attornatus.cadastro.exception.NotFoundException;
 import com.attornatus.cadastro.infra.PessoaRepository;
@@ -14,16 +15,17 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
-import static com.attornatus.cadastro.mapper.EnderecoMapper.toEndereco;
-import static com.attornatus.cadastro.mapper.EnderecoMapper.toEnderecos;
+import static com.attornatus.cadastro.mapper.EnderecoMapper.*;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoa;
 import static com.attornatus.cadastro.mapper.PessoaMapper.toPessoaResponse;
 
 @Service
 public class PessoaService {
 
-    private final String MENSAGEM_EXCEPTION_NOT_FOUND = "Pessoa não encontrada!";
+    private static final String MENSAGEM_EXCEPTION_NOT_FOUND = "Pessoa não encontrada!";
+    private static final String MENSAGEM_EXCEPTION_NOT_FOUND_ENDERECO = "Endereço não encontrado!";
 
     private final PessoaRepository pessoaRepository;
     private final EnderecoService enderecoService;
@@ -85,4 +87,20 @@ public class PessoaService {
                 .orElseThrow(() -> new NotFoundException(MENSAGEM_EXCEPTION_NOT_FOUND));
     }
 
+    public EnderecoResponse setarEnderecoPrincipal(Long idPessoa, Long idEndereco) {
+        Pessoa pessoa = buscarPessoaPorId(idPessoa);
+
+       Optional<Endereco> enderecoPrincipalAtual = pessoa.getEndereco().stream()
+                .filter(Endereco::isPrincipal)
+                .findFirst();
+
+        enderecoPrincipalAtual.ifPresent(endereco -> endereco.setPrincipal(false));
+
+        Endereco enderecoPrincipal = pessoa.getEndereco().stream()
+                  .filter(endereco -> endereco.getId().equals(idEndereco))
+                  .findFirst().orElseThrow(() -> new NotFoundException(MENSAGEM_EXCEPTION_NOT_FOUND_ENDERECO));
+        enderecoPrincipal.setPrincipal(true);
+
+       return toEnderecoResponse(enderecoService.salvar(enderecoPrincipal));
+    }
 }

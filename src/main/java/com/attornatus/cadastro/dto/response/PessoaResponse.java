@@ -16,13 +16,13 @@ import java.util.List;
 @Builder
 public class PessoaResponse {
 
-    Long id;
+    private Long id;
 
-    String nome;
+    private String nome;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 
-    List<EnderecoResponse> endereco;
+    private List<EnderecoResponse> endereco;
 }

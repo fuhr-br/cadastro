@@ -4,6 +4,7 @@ package com.attornatus.cadastro.controller;
 import com.attornatus.cadastro.dto.request.EnderecoRequest;
 import com.attornatus.cadastro.dto.request.PessoaRequest;
 import com.attornatus.cadastro.dto.request.PessoaSemEnderecoRequest;
+import com.attornatus.cadastro.dto.response.EnderecoResponse;
 import com.attornatus.cadastro.dto.response.PessoaResponse;
 import com.attornatus.cadastro.service.PessoaService;
 import org.springframework.http.HttpStatus;
@@ -51,4 +52,12 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaService.salvarEndereco(enderecoRequest, id), HttpStatus.CREATED);
     }
 
+    @PutMapping("/{idPessoa}/endereco/{idEndereco}")
+    public ResponseEntity<EnderecoResponse> setarEnderecoPrincipal(
+            @PathVariable Long idPessoa,
+            @PathVariable Long idEndereco
+
+    ){
+        return new ResponseEntity<>(pessoaService.setarEnderecoPrincipal(idPessoa,idEndereco), HttpStatus.OK);
+    }
 }

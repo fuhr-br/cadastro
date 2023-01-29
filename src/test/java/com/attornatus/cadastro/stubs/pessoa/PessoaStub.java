@@ -1,6 +1,7 @@
-package com.attornatus.cadastro.stubs;
+package com.attornatus.cadastro.stubs.pessoa;
 
 import com.attornatus.cadastro.domain.Pessoa;
+import com.attornatus.cadastro.stubs.endereco.EnderecoStub;
 
 import java.time.LocalDate;
 

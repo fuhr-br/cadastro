@@ -20,9 +20,22 @@ public interface EnderecoMapper {
                 .numero(dto.getNumero()).build();
     }
 
+    static Endereco toEnderecoOfResponse(EnderecoResponse dto){
+        return  Endereco.builder()
+                .logradluro(dto.getLogradluro())
+                .cep(dto.getCep())
+                .cidade(dto.getCidade())
+                .numero(dto.getNumero()).build();
+    }
+
+
      static List<Endereco> toEnderecos(List<EnderecoRequest> lista){
       return   lista.stream().map(EnderecoMapper::toEndereco).toList();
     }
+    static List<Endereco> toEnderecosOfResponses(List<EnderecoResponse> lista){
+        return   lista.stream().map(EnderecoMapper::toEnderecoOfResponse).toList();
+    }
+
 
      static List<EnderecoResponse> toEnderecosResponse(List<Endereco> endereco){
         return endereco.stream().map(dto->

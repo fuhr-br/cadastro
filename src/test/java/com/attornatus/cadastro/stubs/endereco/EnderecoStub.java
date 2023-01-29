@@ -1,4 +1,4 @@
-package com.attornatus.cadastro.stubs;
+package com.attornatus.cadastro.stubs.endereco;
 
 import com.attornatus.cadastro.domain.Endereco;
 

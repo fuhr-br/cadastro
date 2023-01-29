@@ -1,6 +1,7 @@
-package com.attornatus.cadastro.stubs;
+package com.attornatus.cadastro.stubs.pessoa;
 
 import com.attornatus.cadastro.dto.request.PessoaRequest;
+import com.attornatus.cadastro.stubs.endereco.EnderecoRequestStub;
 
 import java.time.LocalDate;
 import java.util.List;

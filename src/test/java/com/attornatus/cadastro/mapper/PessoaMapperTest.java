@@ -4,10 +4,10 @@ import com.attornatus.cadastro.domain.Endereco;
 import com.attornatus.cadastro.domain.Pessoa;
 import com.attornatus.cadastro.dto.request.PessoaRequest;
 import com.attornatus.cadastro.dto.response.PessoaResponse;
-import com.attornatus.cadastro.stubs.EnderecoStub;
-import com.attornatus.cadastro.stubs.PessoaRequestStub;
-import com.attornatus.cadastro.stubs.PessoaResponseStub;
-import com.attornatus.cadastro.stubs.PessoaStub;
+import com.attornatus.cadastro.stubs.endereco.EnderecoStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaRequestStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaResponseStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaStub;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

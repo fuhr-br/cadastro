@@ -2,7 +2,7 @@ package com.attornatus.cadastro.service;
 
 import com.attornatus.cadastro.domain.Endereco;
 import com.attornatus.cadastro.infra.EnderecoRepository;
-import com.attornatus.cadastro.stubs.EnderecoStub;
+import com.attornatus.cadastro.stubs.endereco.EnderecoStub;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

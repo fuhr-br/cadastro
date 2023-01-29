@@ -2,8 +2,8 @@ package com.attornatus.cadastro.mapper;
 
 import com.attornatus.cadastro.domain.Endereco;
 import com.attornatus.cadastro.dto.request.EnderecoRequest;
-import com.attornatus.cadastro.stubs.EnderecoRequestStub;
-import com.attornatus.cadastro.stubs.EnderecoStub;
+import com.attornatus.cadastro.stubs.endereco.EnderecoRequestStub;
+import com.attornatus.cadastro.stubs.endereco.EnderecoStub;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,12 @@
 package com.attornatus.cadastro.controller;
 
 import com.attornatus.cadastro.dto.request.PessoaRequest;
+import com.attornatus.cadastro.dto.request.PessoaSemEnderecoRequest;
 import com.attornatus.cadastro.dto.response.PessoaResponse;
-import com.attornatus.cadastro.stubs.EnderecoResponseStub;
-import com.attornatus.cadastro.stubs.PessoaRequestStub;
-import com.attornatus.cadastro.stubs.PessoaResponseStub;
+import com.attornatus.cadastro.stubs.endereco.EnderecoResponseStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaRequestStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaResponseStub;
+import com.attornatus.cadastro.stubs.pessoa.PessoaSemEnderecoRequestStub;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static com.attornatus.cadastro.SqlProvider.resetaDB;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,18 +39,23 @@ class PessoaControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
     private String retornoComoJson;
     private String envioComoJSON;
+    private String envioComoJSONUpdate;
 
     PessoaRequest pessoaRequest;
     PessoaResponse pessoaResponse;
+    PessoaSemEnderecoRequest pessoaRequestSemEndereco;
+
     @BeforeEach
     public void inicializar() throws JsonProcessingException {
          pessoaRequest = PessoaRequestStub.construirParaPersistir();
+         pessoaRequestSemEndereco = PessoaSemEnderecoRequestStub.construir();
          pessoaResponse = PessoaResponseStub.construir();
          pessoaResponse.setEndereco(List.of(EnderecoResponseStub.construir()));
-        pessoaResponse.setId(1L);
+         pessoaResponse.setId(1L);
 
         retornoComoJson = mapper.writeValueAsString(pessoaResponse);
         envioComoJSON = mapper.writeValueAsString(pessoaRequest);
+        envioComoJSONUpdate = mapper.writeValueAsString(pessoaRequestSemEndereco);
     }
 
     @Test
@@ -64,4 +71,34 @@ class PessoaControllerTest {
                 .andExpect(status().isCreated());
 
     }
+
+    @DisplayName("Teste GET/Error")
+    @Test
+    public void testeGetIdInvalido() throws Exception {
+        mockMvc.perform(get("/cadastro/pessoa/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNotFound());
+    }
+
+    @DisplayName("Teste GET/BuscarTodos")
+    @Test
+    public void testeBuscarTodos() throws Exception {
+        mockMvc.perform(get("/cadastro/pessoa")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+
+    @DisplayName("Teste PUT/Error")
+    @Test
+    public void testePutIdInvalido() throws Exception {
+        mockMvc.perform(put("/cadastro/pessoa")
+                        .content(envioComoJSONUpdate)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNotFound());
+    }
+
+
+
+
 }

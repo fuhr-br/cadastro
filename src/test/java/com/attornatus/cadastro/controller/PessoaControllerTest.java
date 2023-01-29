@@ -18,11 +18,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static com.attornatus.cadastro.SqlProvider.insertPessoa;
 import static com.attornatus.cadastro.SqlProvider.resetaDB;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -80,11 +82,40 @@ class PessoaControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @DisplayName("Teste GET/BuscarPorID")
+    @Test
+    @SqlGroup({
+            @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = insertPessoa),
+            @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = resetaDB)
+    })
+    public void testeGetId() throws Exception {
+        mockMvc.perform(get("/cadastro/pessoa/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(content().json(retornoComoJson))
+                .andExpect(status().isOk());
+    }
+
     @DisplayName("Teste GET/BuscarTodos")
     @Test
-    public void testeBuscarTodos() throws Exception {
+    public void testeBuscarTodosArrayVazio() throws Exception {
         mockMvc.perform(get("/cadastro/pessoa")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+
+    @DisplayName("Teste GET/BuscarTodos deve retornar lista de Pessoa com endereço")
+    @Test
+    @SqlGroup({
+            @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = insertPessoa),
+            @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = resetaDB)
+    })
+    public void testeBuscarTodos() throws Exception {
+        List<PessoaResponse> pessoasReponse = List.of(pessoaResponse);
+        retornoComoJson = mapper.writeValueAsString(pessoasReponse);
+
+        mockMvc.perform(get("/cadastro/pessoa")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(content().json(retornoComoJson))
                 .andExpect(status().isOk());
     }
 
@@ -97,8 +128,4 @@ class PessoaControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
     }
-
-
-
-
 }

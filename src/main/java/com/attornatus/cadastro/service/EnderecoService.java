@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EnderecoService {
+
     private final EnderecoRepository enderecoRepository;
 
     public EnderecoService(EnderecoRepository enderecoRepository) {
         this.enderecoRepository = enderecoRepository;
     }
 
-    public Endereco save(Endereco endereco) {
+    public Endereco salvar(Endereco endereco) {
       return  enderecoRepository.save(endereco);
     }
 }

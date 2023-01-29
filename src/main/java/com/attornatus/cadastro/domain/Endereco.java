@@ -15,18 +15,26 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+   private Long id;
 
     @Column(name="LOGRADOURO", nullable = false)
-    String logradluro;
+    private String logradluro;
 
     @Column(name="CEP", nullable = false)
-    String cep;
+    private String cep;
 
     @Column(name="NUMERO", nullable = false)
-    Integer numero;
+    private Integer numero;
 
     @Column(name="CIDADE", nullable = false)
-    String cidade;
+    private String cidade;
+
+    @Column(name="PRINCIPAL")
+    @Builder.Default
+    private boolean isPrincipal = false;
+
+    public void setPrincipal(boolean principal) {
+        isPrincipal = principal;
+    }
 
 }

@@ -25,17 +25,29 @@ public interface EnderecoMapper {
                 .logradluro(dto.getLogradluro())
                 .cep(dto.getCep())
                 .cidade(dto.getCidade())
-                .numero(dto.getNumero()).build();
+                .numero(dto.getNumero())
+                .isPrincipal(dto.isPrincipal())
+                .build();
     }
 
+    static EnderecoResponse toEnderecoResponse(Endereco endereco){
+        return  EnderecoResponse.builder()
+                .id(endereco.getId())
+                .logradluro(endereco.getLogradluro())
+                .cep(endereco.getCep())
+                .cidade(endereco.getCidade())
+                .numero(endereco.getNumero())
+                .isPrincipal(endereco.isPrincipal())
+                .build();
+    }
 
      static List<Endereco> toEnderecos(List<EnderecoRequest> lista){
-      return   lista.stream().map(EnderecoMapper::toEndereco).toList();
+        return   lista.stream().map(EnderecoMapper::toEndereco).toList();
     }
+
     static List<Endereco> toEnderecosOfResponses(List<EnderecoResponse> lista){
         return   lista.stream().map(EnderecoMapper::toEnderecoOfResponse).toList();
     }
-
 
      static List<EnderecoResponse> toEnderecosResponse(List<Endereco> endereco){
         return endereco.stream().map(dto->
@@ -45,8 +57,7 @@ public interface EnderecoMapper {
                         .numero(dto.getNumero())
                         .cep(dto.getCep())
                         .cidade(dto.getCidade())
+                        .isPrincipal(dto.isPrincipal())
                 .build() ).toList();
     }
-
-
 }

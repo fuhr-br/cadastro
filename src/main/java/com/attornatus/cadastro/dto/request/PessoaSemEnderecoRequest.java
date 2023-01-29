@@ -16,13 +16,13 @@ import java.time.LocalDate;
 @Data
 public class PessoaSemEnderecoRequest {
 
-    Long id;
+    private Long id;
 
     @Size(min=4, max = 70, message = "Campo nome Ultrapassou o limite de caracteres, max 70")
-    String nome;
+    private String nome;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @JsonSerialize(using = LocalDateSerializer.class)
     @Schema(description = "Data nascimento da pessoa", example = "1986-03-30", required = true)
-    LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 }

@@ -16,18 +16,18 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "NOME",nullable = false, length = 70)
-    String nome;
+    private String nome;
 
     @Column(name = "DATA_NASCIMENTO", nullable = false)
-    LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "ENDERECO_PESSOA", joinColumns = {
             @JoinColumn(name = "PESSOA_ID", referencedColumnName = "id") }, inverseJoinColumns = {
             @JoinColumn(name = "ENDERECO_ID", referencedColumnName = "id") })
-    List<Endereco> endereco;
+    private List<Endereco> endereco;
 
 }

@@ -22,13 +22,13 @@ public class PessoaRequest {
 
     @NotBlank(message = "Campo nome não pode ser nulo ou vazio")
     @Size(min=4, max = 70, message = "Campo nome Ultrapassou o limite de caracteres, max 70")
-    String nome;
+    private String nome;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = "Campo Datas inválido")
     @Schema(description = "Data nascimento da pessoa", example = "1986-03-30", required = true)
-    LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 
-    List<@Valid EnderecoRequest> enderecos;
+    private List<@Valid EnderecoRequest> enderecos;
 }

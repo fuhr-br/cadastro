@@ -25,7 +25,9 @@ public interface EnderecoMapper {
                 .logradluro(dto.getLogradluro())
                 .cep(dto.getCep())
                 .cidade(dto.getCidade())
-                .numero(dto.getNumero()).build();
+                .numero(dto.getNumero())
+                .isPrincipal(dto.isPrincipal())
+                .build();
     }
 
 

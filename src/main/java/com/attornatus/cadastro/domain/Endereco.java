@@ -29,6 +29,7 @@ public class Endereco {
     @Column(name="CIDADE", nullable = false)
     String cidade;
 
+    @Column(name="PRINCIPAL")
     @Builder.Default
     boolean isPrincipal = false;
 }

@@ -16,4 +16,5 @@ public class EnderecoResponse {
     String cep;
     Integer numero;
     String cidade;
+    boolean isPrincipal;
 }
